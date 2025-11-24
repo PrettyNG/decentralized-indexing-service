@@ -281,3 +281,88 @@
     distributed: bool
   }
 )
+
+(define-map NodeRewards
+  {
+    node: principal,
+    period-id: uint
+  }
+  {
+    amount: uint,
+    claimed: bool
+  }
+)
+
+(define-map Proposals
+  { proposal-id: uint }
+  {
+    proposer: principal,
+    description-hash: (string-ascii 64),
+    parameter-key: (string-ascii 32),
+    proposed-value: uint,
+    start-block: uint,
+    end-block: uint,
+    votes-for: uint,
+    votes-against: uint,
+    executed: bool
+  }
+)
+
+(define-map ProposalVotes
+  {
+    proposal-id: uint,
+    voter: principal
+  }
+  {
+    vote-amount: uint,
+    for: bool
+  }
+)
+
+(define-map DataFeeds
+  { feed-id: (string-ascii 32) }
+  {
+    creator: principal,
+    feed-type: uint,
+    access-fee: uint,
+    metadata-hash: (string-ascii 64),
+    creation-block: uint,
+    expiry-block: uint,
+    subscribers: uint
+  }
+)
+
+(define-map FeedSubscriptions
+  {
+    subscriber: principal,
+    feed-id: (string-ascii 32)
+  }
+  {
+    start-block: uint,
+    subscription-period: uint,
+    total-paid: uint
+  }
+)
+
+(define-map Subnets
+  { subnet-id: (string-ascii 32) }
+  {
+    creator: principal,
+    creation-block: uint,
+    node-count: uint,
+    min-stake-requirement: uint,
+    specialized: bool,
+    topic-hash: (string-ascii 64)
+  }
+)
+
+(define-map SubnetMembership
+  {
+    subnet-id: (string-ascii 32),
+    node: principal
+  }
+  {
+    join-block: uint,
+    stake-committed: uint
+  }
+)
